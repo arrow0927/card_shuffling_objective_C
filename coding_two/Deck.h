@@ -14,8 +14,9 @@
 
 -(id)initWithSuits:(NSArray*)suitsArray numberOfCardValues:(NSArray*)cardValues; //Custom Init
 -(void)showPositionsOfEachGuidOverShuffles; //Debug Method
--(void)printDeck;
--(void)shuffleDeck;
+-(void)printDeckForLastShuffle;
+-(void)shuffleDeckAlgorithmTwoRandomNumbers;
+-(void)shuffleDeckAlgorithmOneRandomNumber;
 -(void)printGuidGraph;
 -(NSMutableArray *)getAllRepeatedSequencesInLastTwoShuffles;
 
