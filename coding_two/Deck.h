@@ -12,8 +12,8 @@
 @interface Deck : NSObject
 
 
--(void)showPositionsOfEachGuidOverShuffles;
--(id)initWithSuits:(NSArray*)suitsArray numberOfCardValues:(NSArray*)cardValues;
+-(id)initWithSuits:(NSArray*)suitsArray numberOfCardValues:(NSArray*)cardValues; //Custom Init
+-(void)showPositionsOfEachGuidOverShuffles; //Debug Method
 -(void)printDeck;
 -(void)shuffleDeck;
 -(void)printGuidGraph;

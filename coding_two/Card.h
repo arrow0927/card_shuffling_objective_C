@@ -16,6 +16,5 @@
 
 
 -(id)initWithSuit:(NSString*)suit value:(NSString*)value;
--(NSString*)description;
--(id)copyWithZone:(NSZone *)zone;
+
 @end
