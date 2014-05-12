@@ -72,7 +72,7 @@
 {
     
     NSMutableArray *cardPositionsForLastShuffleNumber = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleNumber];
-    NSLog(@"Began Shuffling deck with 2 Random Number Algorithm......");
+    //NSLog(@"Began Shuffling deck with 2 Random Number Algorithm......");
     NSMutableArray *deepCopyArrayCardPositionsForLastShuffleNumber = [[NSMutableArray alloc] initWithArray:cardPositionsForLastShuffleNumber
                                                                                                  copyItems:YES];
     NSMutableArray *cardPositionsArrayAfterShuffle;
@@ -98,7 +98,7 @@
             {
                 [cardPositionsArrayAfterShuffle replaceObjectAtIndex:destinationRandomIndex withObject:swapCard];
                 NSMutableArray *arrayOfGuidPositions = [self.guidMovementTrackerOverShuffles objectForKey:[swapCard guid]];
-                NSLog(@"Moving Card from index:%d to index:%d", (int)sourceRandomIndex, (int)destinationRandomIndex);
+                //NSLog(@"Moving Card from index:%d to index:%d", (int)sourceRandomIndex, (int)destinationRandomIndex);
                 [arrayOfGuidPositions addObject:[NSNumber numberWithInt:(int)destinationRandomIndex]];
                 [self.guidMovementTrackerOverShuffles setObject:arrayOfGuidPositions forKey:[swapCard guid]];
                 [deepCopyArrayCardPositionsForLastShuffleNumber removeObjectAtIndex:sourceRandomIndex];
@@ -125,7 +125,7 @@
 
 -(void)shuffleDeckAlgorithmOneRandomNumber
 {
-    NSLog(@"Began Shuffling deck using 1 Random Number algorithm ......");
+    //NSLog(@"Began Shuffling deck using 1 Random Number algorithm ......");
     NSMutableArray *cardPositionsForLastShuffleNumber = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleNumber];
     NSMutableArray *deepCopyArrayCardPositionsForLastShuffleNumber = [[NSMutableArray alloc] initWithArray:cardPositionsForLastShuffleNumber
                                                                                                  copyItems:YES];
@@ -141,7 +141,7 @@
             Card *swapCard = [deepCopyArrayCardPositionsForLastShuffleNumber objectAtIndex:sourceRandomIndex];
             [cardPositionsArrayAfterShuffle addObject:swapCard];
             NSMutableArray *arrayOfGuidPositions = [self.guidMovementTrackerOverShuffles objectForKey:[swapCard guid]];
-            NSLog(@"Moving Card from index:%d to index:%d", (int)sourceRandomIndex, (int)[cardPositionsArrayAfterShuffle indexOfObject:swapCard]);
+            //NSLog(@"Moving Card from index:%d to index:%d", (int)sourceRandomIndex, (int)[cardPositionsArrayAfterShuffle indexOfObject:swapCard]);
             [arrayOfGuidPositions addObject:[NSNumber numberWithInt:(int)[cardPositionsArrayAfterShuffle indexOfObject:swapCard]]];
             [self.guidMovementTrackerOverShuffles setObject:arrayOfGuidPositions forKey:[swapCard guid]];
             [deepCopyArrayCardPositionsForLastShuffleNumber removeObjectAtIndex:sourceRandomIndex];
@@ -165,12 +165,19 @@
 {
     NSMutableArray *arrayOfCardsForLastShuffle = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleNumber];
     int totalCardNumber = (int)[arrayOfCardsForLastShuffle count];
-    NSLog(@"\nDeck for shuffle number %@ has %d cards\n", self.lastShuffleNumber ,totalCardNumber);
-    
+    if([self.lastShuffleNumber  isEqual: @"0"] )
+    {
+        NSLog(@"\nCard positions after initializing a new Deck (before any shuffling) are as follows\n");
+    }
+    else
+    {
+        NSLog(@"\nCard positions after shuffle number %@ are as follows\n", self.lastShuffleNumber);
+    }
+
     
     for (int i =0; i < totalCardNumber; i++)
     {
-        NSLog(@"Card[%d]=  %@",i,[[arrayOfCardsForLastShuffle objectAtIndex:i ] description]);
+        NSLog(@"Deck[%d]=  %@",i,[[arrayOfCardsForLastShuffle objectAtIndex:i ] showCardWithoutGUID]);
     }
     NSLog(@" ");
 }
@@ -231,7 +238,10 @@
 
 # pragma mark - Helper Methods
 
-
+-(NSString*)getNumberOfShuffles
+{
+    return [NSString stringWithFormat:@"%d",([self.lastShuffleNumber intValue])];
+}
 
 
 
@@ -281,23 +291,23 @@
     NSMutableArray *matchingPairs = [[NSMutableArray alloc] init];
     
     NSArray *keys = [lastShuffle allKeys];
-    NSLog(@"Comparing the successors of a predecesor over the last 2 shuffles to detect repeated sequences");
+    //NSLog(@"Comparing the successors of a predecesor over the last 2 shuffles to detect repeated sequences");
     for(NSString* predecessor in keys)
     {
-        NSLog(@" ");
-        NSLog(@"predecessor = %@", predecessor);
+        //NSLog(@" ");
+        //NSLog(@"predecessor = %@", predecessor);
         NSMutableArray *lastSuccessors = [lastShuffle objectForKey:predecessor];
-        NSLog(@"successor(last shuffle):");
-        for (id obj in lastSuccessors)
-        {
-            NSLog(@"%@", [obj description]);
-        }
+        //NSLog(@"successor(last shuffle):");
+//        for (id obj in lastSuccessors)
+//        {
+//            NSLog(@"%@", [obj description]);
+//        }
         NSMutableArray *secondLastSuccessors = [secondLastShuffle objectForKey:predecessor];
-        NSLog(@"successor(second from last shuffle):");
-        for (id obj in secondLastSuccessors)
-        {
-            NSLog(@"%@", [obj description]);
-        }
+        //NSLog(@"successor(second from last shuffle):");
+//        for (id obj in secondLastSuccessors)
+//        {
+//            NSLog(@"%@", [obj description]);
+//        }
 
         if(lastSuccessors !=nil && [lastSuccessors count] > 0 && secondLastSuccessors != nil && [secondLastSuccessors count] > 0)
         {

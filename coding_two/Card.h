@@ -16,5 +16,6 @@
 
 
 -(id)initWithSuit:(NSString*)suit value:(NSString*)value;
+-(NSString*)showCardWithoutGUID;
 
 @end

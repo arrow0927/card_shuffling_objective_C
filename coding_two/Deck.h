@@ -21,6 +21,7 @@
 -(void)printGuidGraph;
 -(NSMutableArray *)getAllRepeatedSequencesInLastTwoShuffles;
 -(void)printRepeatedSequencesOverLastTwoshuffles;
+-(NSString*)getNumberOfShuffles;
 
 
 

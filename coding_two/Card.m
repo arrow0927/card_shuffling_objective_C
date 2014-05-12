@@ -43,9 +43,14 @@
 }
 
 
+-(NSString*)showCardWithoutGUID
+{
+   return [NSString stringWithFormat:@"%@[%@]", self.suit, self.value]; 
+}
+
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"<%@> %@[%@]",self.guid, self.suit, self.value];
+    return [NSString stringWithFormat:@"%@[%@] - GUID: <%@> ", self.suit, self.value, self.guid];
 }
 
 
