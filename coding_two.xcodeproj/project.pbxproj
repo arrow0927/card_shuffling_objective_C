@@ -10,6 +10,9 @@
 		81982BF4191D9FE30062ABE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81982BF3191D9FE30062ABE0 /* Foundation.framework */; };
 		81982BF7191D9FE30062ABE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982BF6191D9FE30062ABE0 /* main.m */; };
 		81982BFB191D9FE40062ABE0 /* coding_two.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 81982BFA191D9FE40062ABE0 /* coding_two.1 */; };
+		81982C03191DAFA10062ABE0 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C02191DAFA10062ABE0 /* Deck.m */; };
+		81982C06191DD0190062ABE0 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C05191DD0190062ABE0 /* Card.m */; };
+		81982C0F191DD79B0062ABE0 /* NSString+Guid.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C0E191DD79B0062ABE0 /* NSString+Guid.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +34,13 @@
 		81982BF6191D9FE30062ABE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		81982BF9191D9FE30062ABE0 /* coding_two-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "coding_two-Prefix.pch"; sourceTree = "<group>"; };
 		81982BFA191D9FE40062ABE0 /* coding_two.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = coding_two.1; sourceTree = "<group>"; };
+		81982C01191DAFA10062ABE0 /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		81982C02191DAFA10062ABE0 /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		81982C04191DD0190062ABE0 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		81982C05191DD0190062ABE0 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		81982C0D191DD79B0062ABE0 /* NSString+Guid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Guid.h"; sourceTree = "<group>"; };
+		81982C0E191DD79B0062ABE0 /* NSString+Guid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Guid.m"; sourceTree = "<group>"; };
+		81982C10191F0FAF0062ABE0 /* Questions_Objective_c.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Questions_Objective_c.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,13 @@
 				81982BF6191D9FE30062ABE0 /* main.m */,
 				81982BFA191D9FE40062ABE0 /* coding_two.1 */,
 				81982BF8191D9FE30062ABE0 /* Supporting Files */,
+				81982C01191DAFA10062ABE0 /* Deck.h */,
+				81982C02191DAFA10062ABE0 /* Deck.m */,
+				81982C04191DD0190062ABE0 /* Card.h */,
+				81982C05191DD0190062ABE0 /* Card.m */,
+				81982C0D191DD79B0062ABE0 /* NSString+Guid.h */,
+				81982C0E191DD79B0062ABE0 /* NSString+Guid.m */,
+				81982C10191F0FAF0062ABE0 /* Questions_Objective_c.rtf */,
 			);
 			path = coding_two;
 			sourceTree = "<group>";
@@ -139,7 +156,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81982C03191DAFA10062ABE0 /* Deck.m in Sources */,
 				81982BF7191D9FE30062ABE0 /* main.m in Sources */,
+				81982C0F191DD79B0062ABE0 /* NSString+Guid.m in Sources */,
+				81982C06191DD0190062ABE0 /* Card.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

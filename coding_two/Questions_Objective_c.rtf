@@ -1,0 +1,35 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;\red26\green26\blue26;
+}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs26 \cf2 \cb3 Questions:\
+1) How might you adapt your code to check for sequences of 3, 4, or more cards from the previous shuffle?\
+\
+"Deck.m" contains a property called successorNumber. This is set to 1 for a sequence of 2. For sequence of 3 this can be set to 2 and for a sequence of 4 this can be set to 3.  The function "Deck.m/-(NSMutableArray*)getNumberOf:(int)successorNumbers SuccessorsForIndexValue:(int)indexOfPredecessor forShuffle:(NSString*)shuffle" synthesizes a NSMutableArray of all n-tuples for a given card. It goes as deep as the value of "\cf4 \cb1 successorNumber" is set up to be.\cf2 \cb3 \
+\
+\
+\
+2) How might you adapt your code to check for combinations of N cards, rather than sequences?\
+\
+\
+\
+\
+\
+3) How might you adapt your code to check for card sequences that were present in any previous shuffle? (i.e. comparing against all previous shuffles, not just the most recent one)\
+\
+My code updates a graph after every shuffle of the deck. The graph basically adds a Dictionary for each shuffle. In this dictionary it connects every card to its successor Card. It uses GUID numbers to keep track of the card and ensure the uniqueness of the card. Thus whether there are 2 shuffles or n shuffles, they will all have their Card-states captured in the GUIDGraph. and any sequence on any shuffle can be tracked for repetitions. Since all the shuffles have their cards in the GUID Graph.\
+\
+\
+\
+4) If necessary, how might you change your code to accommodate more than 4 suits, or more than 13 different card values.\
+\
+My Deck class creates the Deck based on variables passed into the initializer. The initializer looks like this "-(id)initWithSuits:(NSArray*)suitsArray numberOfCardValues:(NSArray*)cardValues" and the number of suits and number of card values are variables passed in as nsarrays. Thus, the initializer is very flexible in creating the Deck based on any number of suits. Each card is a unique combination of suit+card value, I have further made this bulletproof by generating a GUID that identifies each card. Thus it becomes very easy to extend the deck beyond the standard deck variables without causing other functions to break. \
+\
+\
+5) Would you do things any differently if you were optimizing purely for speed? How about if you were trying to minimize memory usage?\
+\
+To optimize for speed, I would reduce the number of mutable datastructures in use. }
