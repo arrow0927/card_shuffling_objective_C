@@ -57,7 +57,7 @@
         }
         NSString *currentShuffleNumber = @"0";
         [_cardPositionsWithinAShuffle setObject:tempArrayOfCardObjs forKey:currentShuffleNumber];
-        [self setUpPredecessorSuccessorGraphForShuffleNumber:currentShuffleNumber];
+        //[self setUpPredecessorSuccessorGraphForShuffleNumber:currentShuffleNumber];
         _lastShuffleNumber = currentShuffleNumber;
         NSLog(@"Initialized Deck.");
         
@@ -183,7 +183,7 @@
     for (NSString* key in keys)
     {
         NSMutableDictionary *sequencesForShuffle = [self.predecessorSuccessorGraph objectForKey:key];
-        NSLog(@"Showing Graph connections after shuffle number:%@", key);
+        NSLog(@"\nShowing Graph connections after shuffle number:%@", key);
         NSArray *allPredecessors = [sequencesForShuffle allKeys];
         for (NSString * predecessor in allPredecessors)
         {
