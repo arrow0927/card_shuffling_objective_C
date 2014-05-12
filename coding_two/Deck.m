@@ -11,12 +11,12 @@
 @interface Deck ()
 
 
-@property (nonatomic, strong) NSMutableDictionary *cardStatesAfterShuffle;
+@property (nonatomic, strong) NSMutableDictionary *cardPositionsWithinAShuffle;
 @property (nonatomic, strong) NSString *lastShuffleIndex;
-@property (nonatomic, assign) int numOfSuits;
-@property (nonatomic, assign) int numOfValues;
-@property (nonatomic, strong) NSMutableArray *guidArray;
-@property (nonatomic, strong) NSMutableDictionary *guidMovements; //remove
+@property (nonatomic, assign) int numOfSuits; // TO DO-Remove before production
+@property (nonatomic, assign) int numOfValues; //TO DO-Remove before production
+@property (nonatomic, strong) NSMutableArray *guidArray; //TO DO-Remove before production
+@property (nonatomic, strong) NSMutableDictionary *guidMovements; //TO DO-Remove before production
 @property (nonatomic, strong) NSMutableDictionary *guidGraph;
 @property (nonatomic, assign) int successorNumber;
 
@@ -31,7 +31,7 @@
     
     if(self = [super init])
     {
-        _cardStatesAfterShuffle = [[NSMutableDictionary alloc] initWithCapacity:1];
+        _cardPositionsWithinAShuffle = [[NSMutableDictionary alloc] initWithCapacity:1];
         _numOfSuits = (int)[suitsArray count];
         _numOfValues = (int)[cardValues count];
         _guidArray = [NSMutableArray arrayWithCapacity:(_numOfSuits * _numOfValues)];
@@ -54,7 +54,7 @@
                 i++;
             }
         }
-        [_cardStatesAfterShuffle setObject:tempArray forKey:@"0"];
+        [_cardPositionsWithinAShuffle setObject:tempArray forKey:@"0"];
         [self setUpGuidGraphForShuffle:@"0"];
         _lastShuffleIndex = @"0";
         
@@ -68,7 +68,7 @@
 
 -(void)printDeck
 {
-    NSMutableArray *arrayOfCardsForLastShuffle = [self.cardStatesAfterShuffle valueForKeyPath:self.lastShuffleIndex];
+    NSMutableArray *arrayOfCardsForLastShuffle = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleIndex];
     int totalCardNumber = (int)[arrayOfCardsForLastShuffle count];
     NSLog(@"Deck has %d cards\n", totalCardNumber);
     
@@ -82,7 +82,7 @@
 
 -(void)shuffleDeck
 {
-    NSMutableArray *arrayOfCardsForLastShuffle = [self.cardStatesAfterShuffle valueForKeyPath:self.lastShuffleIndex];
+    NSMutableArray *arrayOfCardsForLastShuffle = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleIndex];
     NSLog(@"Shuffling deck......");
     NSMutableArray *cardsBeforeShuffle = [[NSMutableArray alloc] initWithArray:arrayOfCardsForLastShuffle
                                                                      copyItems:YES];
@@ -120,7 +120,7 @@
         }
         
         self.lastShuffleIndex = [NSString stringWithFormat:@"%d",([self.lastShuffleIndex intValue] + 1)];
-        [self.cardStatesAfterShuffle setObject:cardsAfterShuffle forKey:self.lastShuffleIndex];
+        [self.cardPositionsWithinAShuffle setObject:cardsAfterShuffle forKey:self.lastShuffleIndex];
         [self setUpGuidGraphForShuffle:self.lastShuffleIndex];
         
         
@@ -136,7 +136,7 @@
 -(void)setUpGuidGraphForShuffle:(NSString*)shuffle
 {
     NSMutableDictionary *graph = [[NSMutableDictionary alloc] init];
-    NSMutableArray *cardsInLastShuffle = [self.cardStatesAfterShuffle objectForKey:shuffle];
+    NSMutableArray *cardsInLastShuffle = [self.cardPositionsWithinAShuffle objectForKey:shuffle];
 
     for(Card *cd  in cardsInLastShuffle)
     {
@@ -150,7 +150,7 @@
 -(NSMutableArray*)getNumberOf:(int)successorNumbers SuccessorsForIndexValue:(int)indexOfPredecessor forShuffle:(NSString*)shuffle
 {
     NSMutableArray *successors = [[NSMutableArray alloc]init];
-    NSMutableArray *cardsInLastShuffle = [self.cardStatesAfterShuffle objectForKey:shuffle];
+    NSMutableArray *cardsInLastShuffle = [self.cardPositionsWithinAShuffle objectForKey:shuffle];
    
     for(int i = indexOfPredecessor; i < (indexOfPredecessor + successorNumbers); i++)
     {
