@@ -13,6 +13,7 @@
 		81982C03191DAFA10062ABE0 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C02191DAFA10062ABE0 /* Deck.m */; };
 		81982C06191DD0190062ABE0 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C05191DD0190062ABE0 /* Card.m */; };
 		81982C0F191DD79B0062ABE0 /* NSString+Guid.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C0E191DD79B0062ABE0 /* NSString+Guid.m */; };
+		81982C13192129CC0062ABE0 /* Analyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 81982C12192129CC0062ABE0 /* Analyzer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		81982C0D191DD79B0062ABE0 /* NSString+Guid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Guid.h"; sourceTree = "<group>"; };
 		81982C0E191DD79B0062ABE0 /* NSString+Guid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Guid.m"; sourceTree = "<group>"; };
 		81982C10191F0FAF0062ABE0 /* Questions_Objective_c.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Questions_Objective_c.rtf; sourceTree = "<group>"; };
+		81982C11192129CC0062ABE0 /* Analyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analyzer.h; sourceTree = "<group>"; };
+		81982C12192129CC0062ABE0 /* Analyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analyzer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				81982C0D191DD79B0062ABE0 /* NSString+Guid.h */,
 				81982C0E191DD79B0062ABE0 /* NSString+Guid.m */,
 				81982C10191F0FAF0062ABE0 /* Questions_Objective_c.rtf */,
+				81982C11192129CC0062ABE0 /* Analyzer.h */,
+				81982C12192129CC0062ABE0 /* Analyzer.m */,
 			);
 			path = coding_two;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81982C03191DAFA10062ABE0 /* Deck.m in Sources */,
+				81982C13192129CC0062ABE0 /* Analyzer.m in Sources */,
 				81982BF7191D9FE30062ABE0 /* main.m in Sources */,
 				81982C0F191DD79B0062ABE0 /* NSString+Guid.m in Sources */,
 				81982C06191DD0190062ABE0 /* Card.m in Sources */,
@@ -273,6 +279,7 @@
 				81982C00191D9FE40062ABE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

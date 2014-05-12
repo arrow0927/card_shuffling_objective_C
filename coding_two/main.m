@@ -8,67 +8,56 @@
 
 #import <Foundation/Foundation.h>
 #import "Deck.h"
+#import "Analyzer.h"
 
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool
     {
+        //algorithms = @"Algo:1Random", @"Algo:2Random";
         NSArray *deckSuits = @[@"Spade",@"Diamond",@"Club",@"Heart"];
         NSArray *deckValues = @[@"Ace", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"Jack", @"Queen", @"King"];
+        Analyzer *analyzer = [[Analyzer alloc]init];
+        int numberOfShuffles = 2;
+        //Shuffle Number 0 is the state of cards at Deck initiation
         
+        NSLog(@"Testing with Algorithm of 2 random number");
         Deck *myDeck = [[Deck alloc] initWithSuits:deckSuits
                                 numberOfCardValues:deckValues];
         
-       NSMutableDictionary * repeatedSequencesByAlgorithm = [[NSMutableDictionary alloc] init];
-        
-        //Test the output with shuffle algorithm of 2 random numbers
-        NSMutableArray *repeatedSequences2Randoms = [[NSMutableArray alloc] init];
-        for(int i = 0; i < 2; i++)
+        for(int shuffleNumber = 1; shuffleNumber <= numberOfShuffles; shuffleNumber++)
         {
             [myDeck printDeckForLastShuffle];
+            [analyzer logStartTimeForAlgorithm:@"Algo:2Random"
+                              forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
             [myDeck shuffleDeckAlgorithmTwoRandomNumbers];
-            
-            [myDeck showPositionsOfEachGuidOverShuffles];
+            [analyzer logEndTimeForAlgorithm:@"Algo:2Random" forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
+            [analyzer calculateDurationForAlgorithm:@"Algo:2Random" shuffle:[NSString stringWithFormat:@"%d",shuffleNumber]];
             [myDeck printGuidGraph];
-            NSMutableArray *repeatedSequences = [myDeck getAllRepeatedSequencesInLastTwoShuffles];
-            NSLog(@"Repeated pairs in last 2 shuffles = ");
-            for(NSString * repeatPair in repeatedSequences)
-            {
-                NSLog(@"%@", repeatPair);
-                [repeatedSequences2Randoms addObject:repeatPair];
-            }
         }
-        [repeatedSequencesByAlgorithm setObject:repeatedSequences2Randoms
-                                         forKey:@"2Random"];
+        [myDeck showPositionsOfEachGuidOverShuffles];
+        [myDeck printRepeatedSequencesOverLastTwoshuffles];
         
-
+        NSLog(@"Testing with Algorithm of 1 random number");
         Deck *myDeck2 = [[Deck alloc] initWithSuits:deckSuits
-                                numberOfCardValues:deckValues];
-
-        //Test the output with shuffle algorithm of 1 random number
-        NSMutableArray *repeatedSequences1Randoms = [[NSMutableArray alloc] init];
-        for(int i = 0; i < 2; i++)
+                                 numberOfCardValues:deckValues];
+        for(int shuffleNumber = 1; shuffleNumber <= numberOfShuffles; shuffleNumber++)
         {
             [myDeck2 printDeckForLastShuffle];
+            [analyzer logStartTimeForAlgorithm:@"Algo:1Random"
+                              forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
             [myDeck2 shuffleDeckAlgorithmOneRandomNumber];
-            
-            [myDeck2 showPositionsOfEachGuidOverShuffles];
+            [analyzer logEndTimeForAlgorithm:@"Algo:1Random" forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
+            [analyzer calculateDurationForAlgorithm:@"Algo:1Random" shuffle:[NSString stringWithFormat:@"%d",shuffleNumber]];
             [myDeck2 printGuidGraph];
-            NSMutableArray *repeatedSequences2 = [myDeck2 getAllRepeatedSequencesInLastTwoShuffles];
-            NSLog(@" ");
-            NSLog(@"Conclusion= The following pairs of sequences were detected as repeated pairs in last 2 shuffles = ");
-            for(NSString * repeatPair in repeatedSequences2)
-            {
-                NSLog(@"%@", repeatPair);
-                [repeatedSequences1Randoms addObject:repeatPair];
-                
-            }
         }
-        [repeatedSequencesByAlgorithm setObject:repeatedSequences1Randoms
-                                         forKey:@"1Random"];
+        [myDeck2 showPositionsOfEachGuidOverShuffles];
+        [myDeck2 printRepeatedSequencesOverLastTwoshuffles];
         
         
+        [analyzer printAnalysis];
+
         
     }
     return 0;

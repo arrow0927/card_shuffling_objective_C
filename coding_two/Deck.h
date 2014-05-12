@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Card.h"
+#import "Analyzer.h"
 
 @interface Deck : NSObject
 
@@ -19,6 +20,7 @@
 -(void)shuffleDeckAlgorithmOneRandomNumber;
 -(void)printGuidGraph;
 -(NSMutableArray *)getAllRepeatedSequencesInLastTwoShuffles;
+-(void)printRepeatedSequencesOverLastTwoshuffles;
 
 
 

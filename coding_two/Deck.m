@@ -70,8 +70,6 @@
 
 -(void)shuffleDeckAlgorithmTwoRandomNumbers
 {
-    double startTime = [self getCurrentTimeInMilliseconds];
-    NSLog(@"Algorithm Start Time: %f", startTime);
     
     NSMutableArray *cardPositionsForLastShuffleNumber = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleNumber];
     NSLog(@"Began Shuffling deck with 2 Random Number Algorithm......");
@@ -121,17 +119,13 @@
     {
         NSLog(@"ERROR! This Deck has no cards");
     }
-    double endTime = [self getCurrentTimeInMilliseconds];
-    NSLog(@"Algorithm End Time: %f", endTime);
-    NSLog(@"Algorithm Run Time: %f", (endTime - startTime));
+    
     
 }
 
 -(void)shuffleDeckAlgorithmOneRandomNumber
 {
     NSLog(@"Began Shuffling deck using 1 Random Number algorithm ......");
-    double startTime = [self getCurrentTimeInMilliseconds];
-    NSLog(@"Algorithm Start Time: %f", startTime);
     NSMutableArray *cardPositionsForLastShuffleNumber = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleNumber];
     NSMutableArray *deepCopyArrayCardPositionsForLastShuffleNumber = [[NSMutableArray alloc] initWithArray:cardPositionsForLastShuffleNumber
                                                                                                  copyItems:YES];
@@ -161,9 +155,6 @@
     {
         NSLog(@"ERROR! This Deck has no cards");
     }
-    double endTime = [self getCurrentTimeInMilliseconds];
-    NSLog(@"Algorithm End Time: %f", endTime);
-    NSLog(@"Algorithm Run Time: %f", (endTime - startTime));
 }
 
 
@@ -228,16 +219,19 @@
     
 }
 
-
+-(void)printRepeatedSequencesOverLastTwoshuffles
+{
+    NSMutableArray *repeatedSequences = [self getAllRepeatedSequencesInLastTwoShuffles];
+    NSLog(@"%d repeated sequences in the last 2 shuffles ", (int)[repeatedSequences count]);
+    for(NSString * repeatPair in repeatedSequences)
+    {
+        NSLog(@"%@", repeatPair);
+    }
+}
 
 # pragma mark - Helper Methods
 
--(double)getCurrentTimeInMilliseconds
-{
-    NSTimeInterval seconds = [NSDate timeIntervalSinceReferenceDate];
-    
-    return seconds * 1000;
-}
+
 
 
 
