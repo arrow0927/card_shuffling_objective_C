@@ -12,7 +12,6 @@
 
 
 
-
 -(void)calculateDurationForAlgorithm:(NSString*)algorithm shuffle:(NSString*) shuffle;
 -(void)logStartTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle;
 -(void)logEndTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle;

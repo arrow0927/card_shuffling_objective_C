@@ -11,6 +11,11 @@
 #import "Analyzer.h"
 
 
+/* 
+ All questions are answered in the text file included in this project: "Questions_Objective_c.rtf"
+ */
+
+
 
 
 int main(int argc, const char * argv[])
@@ -25,7 +30,9 @@ int main(int argc, const char * argv[])
         int numberOfShuffles = 2;
         
 
-        //Shuffle using one type of algorithm
+        /* 
+         Use shuffling algorithm of 2 random numbers to shuffle deck
+         */
         Deck *myDeck = [[Deck alloc] initWithSuits:deckSuits
                                 numberOfCardValues:deckValues];
         NSLog(@"Shuffling using 1st Algorithm which uses 2 random numbers");
@@ -79,7 +86,9 @@ int main(int argc, const char * argv[])
        
         
         
-        //Now Shuffle using another type of algorithm
+        /*
+         Use shuffling algorithm of 1 Random number to shuffle deck
+         */
         NSLog(@"\nShuffling using 2nd Algorithm which uses 1 random numbers");
         Deck *myDeck1 = [[Deck alloc] initWithSuits:deckSuits
                                  numberOfCardValues:deckValues];
@@ -135,7 +144,9 @@ int main(int argc, const char * argv[])
         NSLog(@"No repeated sequences found after shuffling for %@ times\n\n",[myDeck1 getNumberOfShuffles]);
         
         
-        
+        /*
+         Run some analysis on the run times and robustness of each algorithm to see how they compare
+         */
         
         
         NSLog(@"******* ANALYTICS **************");

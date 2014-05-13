@@ -12,7 +12,10 @@
 
 @property (readonly) NSString *suit;
 @property (readonly) NSString *value;
+
+/* Category*/
 @property (readonly) NSString *guid;
+
 
 
 -(id)initWithSuit:(NSString*)suit value:(NSString*)value;

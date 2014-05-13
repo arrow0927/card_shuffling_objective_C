@@ -10,6 +10,7 @@
 
 @interface NSString (Guid)
 
+
 +(NSString*)guid;
 
 @end

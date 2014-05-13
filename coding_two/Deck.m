@@ -14,9 +14,8 @@
 @property (nonatomic, strong) NSMutableDictionary *cardPositionsWithinAShuffle;
 @property (nonatomic, strong) NSString *lastShuffleNumber;
 @property (nonatomic, strong) NSMutableArray *guidArray; //TO DO-Remove before production
-
 @property (nonatomic, strong) NSMutableDictionary *predecessorSuccessorGraph;
-@property (nonatomic, assign) int sizeOfSequence;
+@property (nonatomic, assign) int numSuccessors;
 
 @end
 
@@ -37,7 +36,7 @@
        
         NSMutableArray *tempArrayOfCardObjs  = [NSMutableArray arrayWithCapacity:(numOfSuits * numOfValues)];
         _predecessorSuccessorGraph = [[NSMutableDictionary alloc] init];
-        _sizeOfSequence = 1;
+        _numSuccessors = 1;
         int i = 0;
         for (id suit in suitsArray)
         {
@@ -119,7 +118,6 @@
 
 -(void)shuffleDeckAlgorithmOneRandomNumber
 {
-    //NSLog(@"Began Shuffling deck using 1 Random Number algorithm ......");
     NSMutableArray *cardPositionsForLastShuffleNumber = [self.cardPositionsWithinAShuffle valueForKeyPath:self.lastShuffleNumber];
     NSMutableArray *deepCopyArrayCardPositionsForLastShuffleNumber = [[NSMutableArray alloc] initWithArray:cardPositionsForLastShuffleNumber
                                                                                                  copyItems:YES];
@@ -174,37 +172,6 @@
 }
 
 
--(void)printGuidGraph
-{
-    
-    NSArray *keys = [self.predecessorSuccessorGraph allKeys];
-    for (NSString* key in keys)
-    {
-        NSMutableDictionary *sequencesForShuffle = [self.predecessorSuccessorGraph objectForKey:key];
-        NSLog(@"\nShowing Graph connections after shuffle number:%@", key);
-        NSArray *allPredecessors = [sequencesForShuffle allKeys];
-        for (NSString * predecessor in allPredecessors)
-        {
-            NSLog(@"(predecessor) %@ ->", predecessor);
-            NSMutableArray *successors = [sequencesForShuffle objectForKey:predecessor];
-            if(successors != nil && [successors count] > 0)
-            {
-                for (NSString* successor in successors)
-                {
-                    NSLog(@"%@ ", successor);
-                }
-            }
-            else
-            {
-                NSLog(@" XXXXX ");
-            }
-        }
-        
-    }
-    
-}
-
-
 
 # pragma mark - Helper Methods
 
@@ -229,7 +196,7 @@
     for(Card *cd  in cardsInLastShuffle)
     {
         int index = (int)[cardsInLastShuffle indexOfObject:cd];
-        NSMutableArray *successors = [self getNumberOf:self.sizeOfSequence SuccessorsForIndexValue:index forShuffle:shuffle];
+        NSMutableArray *successors = [self getNumberOf:self.numSuccessors SuccessorsForIndexValue:index forShuffle:shuffle];
         [graph setObject:successors forKey:[cd guid]];
     }
     [self.predecessorSuccessorGraph setObject:graph forKey:shuffle];
