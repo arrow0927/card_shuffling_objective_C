@@ -51,7 +51,13 @@ int main(int argc, const char * argv[])
         {
             while (repeatSequenceCountAlgo2 > 0)
             {
-                NSLog(@"Detected %d repeated sequences after shuffling for %@ times.\nWe will try to go for 1 more shuffle and see if we get no repeated sequences", repeatSequenceCountAlgo2, [myDeck getNumberOfShuffles]);
+                NSLog(@"Detected %d repeated sequences after shuffling for %@ times.", repeatSequenceCountAlgo2, [myDeck getNumberOfShuffles]);
+                NSMutableArray *repeatedSequence = [myDeck getAllRepeatedSequencesInLastTwoShuffles];
+                for (NSString *repeatedPair in repeatedSequence)
+                {
+                    NSLog(@"Repeated Sequence = %@", repeatedPair);
+                }
+                
                 NSString* shuffleNumber = [NSString stringWithFormat:@"%d",([[myDeck getNumberOfShuffles] intValue] + 1) ];
                 NSLog(@"Shuffling Deck %@ time",shuffleNumber);
 
@@ -102,7 +108,14 @@ int main(int argc, const char * argv[])
         {
             while (repeatSequenceCountAlgo1 > 0)
             {
-                NSLog(@"Detected %d repeated sequences after shuffling for %@ times.\nWe will try to go for 1 more shuffleand see if we get no repeated sequences", repeatSequenceCountAlgo1, [myDeck1 getNumberOfShuffles]);
+                NSLog(@"Detected %d repeated sequences after shuffling for %@ times.", repeatSequenceCountAlgo1, [myDeck1 getNumberOfShuffles]);
+                NSMutableArray *repeatedSequence = [myDeck1 getAllRepeatedSequencesInLastTwoShuffles];
+                for (NSString *repeatedPair in repeatedSequence)
+                {
+                    NSLog(@"Repeated Sequence = %@", repeatedPair);
+                }
+                
+                
                 NSString* shuffleNumber = [NSString stringWithFormat:@"%d",([[myDeck1 getNumberOfShuffles] intValue] + 1) ];
                 NSLog(@"Shuffling Deck %@ time",shuffleNumber);
                 
@@ -125,15 +138,13 @@ int main(int argc, const char * argv[])
         
         
         
-        NSLog(@"Printing analysis of the 2 shuffling algorithms used in this program:");
+        NSLog(@"******* ANALYTICS **************");
+        NSLog(@" ");
         NSLog(@"Run times of shuffle method");
         [analyzer printAnalysis];
+        NSLog(@" ");
         NSLog(@"Number of shuffles needed to achieve no repeats");
-        
-        NSLog(@"Algorithm with 2 random numbers produced %d sequences of repeats", repeatSequenceCountAlgo2);
         NSLog(@"Algorithm with 2 random numbers  took %@ tries to reach 0 repeated sequences", [myDeck getNumberOfShuffles]);
-        
-        NSLog(@"Algorithm with 1 random number produced %d sequences of repeats", repeatSequenceCountAlgo1);
         NSLog(@"Algorithm with 1 random number  took %@ tries to reach 0 repeated sequences", [myDeck1 getNumberOfShuffles]);
         
     }

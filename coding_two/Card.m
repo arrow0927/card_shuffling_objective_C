@@ -16,9 +16,6 @@
 @property (readwrite, assign) NSString *value;
 @property (readwrite, assign) NSString *guid;
 
-// Overridden & Protocol Methods:
-//-(NSString*)description;
-//-(id)copyWithZone:(NSZone *)zone;
 
 @end
 
@@ -27,9 +24,6 @@
 @implementation Card
 
 
-//@synthesize suit = _suit;
-//@synthesize value = _value;
-//@synthesize guid = _guid;
 
 -(id)initWithSuit:(NSString*)suit value:(NSString*)value
 {
