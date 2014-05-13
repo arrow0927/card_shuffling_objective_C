@@ -28,17 +28,19 @@ int main(int argc, const char * argv[])
         //Shuffle using one type of algorithm
         Deck *myDeck = [[Deck alloc] initWithSuits:deckSuits
                                 numberOfCardValues:deckValues];
-        NSLog(@"Shuffling using 1st Algorithm which uses 1 random numbers");
+        NSLog(@"Shuffling using 1st Algorithm which uses 2 random numbers");
         [myDeck printDeckForLastShuffle];
         int repeatSequenceCountAlgo2 = 0;
         
         for(int shuffleNumber = 1; shuffleNumber <= numberOfShuffles; shuffleNumber++)
         {
             NSLog(@"Shuffling Deck %d time",shuffleNumber);
+            
+            [analyzer setMetricsForShuffle:[NSString stringWithFormat:@"%d", shuffleNumber] forAlgorithm:@"Algo:2Random"];
             [analyzer logStartTimeForAlgorithm:@"Algo:2Random" forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
                 
             [myDeck shuffleDeckAlgorithmTwoRandomNumbers];
-                
+            
             [analyzer logEndTimeForAlgorithm:@"Algo:2Random" forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
             [analyzer calculateDurationForAlgorithm:@"Algo:2Random" shuffle:[NSString stringWithFormat:@"%d",shuffleNumber]];
             [myDeck printDeckForLastShuffle];
@@ -52,6 +54,8 @@ int main(int argc, const char * argv[])
                 NSLog(@"Detected %d repeated sequences after shuffling for %@ times.\nWe will try to go for 1 more shuffle and see if we get no repeated sequences", repeatSequenceCountAlgo2, [myDeck getNumberOfShuffles]);
                 NSString* shuffleNumber = [NSString stringWithFormat:@"%d",([[myDeck getNumberOfShuffles] intValue] + 1) ];
                 NSLog(@"Shuffling Deck %@ time",shuffleNumber);
+
+                [analyzer setMetricsForShuffle:shuffleNumber forAlgorithm:@"Algo:2Random"];
                 [analyzer logStartTimeForAlgorithm:@"Algo:2Random" forShuffleNumber:shuffleNumber];
                 
                 [myDeck shuffleDeckAlgorithmTwoRandomNumbers];
@@ -81,6 +85,7 @@ int main(int argc, const char * argv[])
         {
             NSLog(@"Shuffling Deck %d time",shuffleNumber);
             
+            [analyzer setMetricsForShuffle:[NSString stringWithFormat:@"%d", shuffleNumber] forAlgorithm:@"Algo:1Random"];
             [analyzer logStartTimeForAlgorithm:@"Algo:1Random"
                               forShuffleNumber:[NSString stringWithFormat:@"%d",shuffleNumber]];
                 
@@ -100,6 +105,8 @@ int main(int argc, const char * argv[])
                 NSLog(@"Detected %d repeated sequences after shuffling for %@ times.\nWe will try to go for 1 more shuffleand see if we get no repeated sequences", repeatSequenceCountAlgo1, [myDeck1 getNumberOfShuffles]);
                 NSString* shuffleNumber = [NSString stringWithFormat:@"%d",([[myDeck1 getNumberOfShuffles] intValue] + 1) ];
                 NSLog(@"Shuffling Deck %@ time",shuffleNumber);
+                
+                [analyzer setMetricsForShuffle:shuffleNumber forAlgorithm:@"Algo:1Random"];
                 [analyzer logStartTimeForAlgorithm:@"Algo:1Random" forShuffleNumber:shuffleNumber];
                 
                 [myDeck1 shuffleDeckAlgorithmOneRandomNumber];
@@ -119,12 +126,15 @@ int main(int argc, const char * argv[])
         
         
         NSLog(@"Printing analysis of the 2 shuffling algorithms used in this program:");
+        NSLog(@"Run times of shuffle method");
         [analyzer printAnalysis];
+        NSLog(@"Number of shuffles needed to achieve no repeats");
+        
         NSLog(@"Algorithm with 2 random numbers produced %d sequences of repeats", repeatSequenceCountAlgo2);
-        NSLog(@"Algorithm with 2 random number produced took %@ tries of 2 shuffles per try to reach 0 repeated sequences", [myDeck getNumberOfShuffles]);
+        NSLog(@"Algorithm with 2 random numbers  took %@ tries to reach 0 repeated sequences", [myDeck getNumberOfShuffles]);
         
         NSLog(@"Algorithm with 1 random number produced %d sequences of repeats", repeatSequenceCountAlgo1);
-        NSLog(@"Algorithm with 1 random number produced took %@ tries of 2 shuffles per try to reach no repeated sequences", [myDeck1 getNumberOfShuffles]);
+        NSLog(@"Algorithm with 1 random number  took %@ tries to reach 0 repeated sequences", [myDeck1 getNumberOfShuffles]);
         
     }
     return 0;

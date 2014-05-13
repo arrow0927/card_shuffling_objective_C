@@ -23,33 +23,22 @@
     if(self = [super init])
     {
         _analysisLog = [[NSMutableDictionary alloc ] init];
-        NSArray * algorithms = @[@"Algo:1Random",@"Algo:2Random"];
-        NSArray * shuffles = @[@"1", @"2"];
-        NSArray *metrics = @[@"start_time", @"end_time", @"run_time_ms"];
+        [_analysisLog setObject:[[NSMutableDictionary alloc] init] forKey: @"Algo:1Random"];
+        [_analysisLog setObject:[[NSMutableDictionary alloc] init] forKey: @"Algo:2Random"];
         
-        
-        for(NSString * algo in algorithms)
-        {
-            
-            [_analysisLog setObject:[[NSMutableDictionary alloc] init] forKey:algo];
-            for(NSString * shuffle in shuffles)
-            {
-                [[_analysisLog objectForKey:algo] setObject:[[NSMutableDictionary alloc]init]
-                                                     forKey:shuffle];
-                
-                for(NSString * metric in metrics)
-                {
-                    [[[_analysisLog objectForKey:algo] objectForKey:shuffle]setObject:[NSNull null]
-                                                                               forKey:metric];
-                }
-            }
-        }
     }
     
     return self;
 }
 
-
+-(void)setMetricsForShuffle:(NSString*)shuffle forAlgorithm:(NSString*)algorithm
+{
+    NSMutableDictionary *shuffles = [self.analysisLog objectForKey:algorithm];
+    NSArray *metrics = @[@"start_time", @"end_time", @"run_time_ms"];
+    NSMutableArray *metricValues = [[NSMutableArray alloc] initWithArray:@[@"-1", @"-1", @"-1"]];
+    NSMutableDictionary *metricDictionary = [[NSMutableDictionary alloc] initWithObjects:metricValues forKeys:metrics];
+    [shuffles setObject:metricDictionary forKey:shuffle];
+}
 
 -(double)getCurrentTimeInMilliseconds
 {
@@ -60,6 +49,19 @@
 }
 
 
+
+-(void)logStartTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle
+{
+    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] removeObjectForKey:@"start_time"];
+    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] setObject:[NSString stringWithFormat:@"%f",[self getCurrentTimeInMilliseconds]] forKey:@"start_time"];
+}
+
+-(void)logEndTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle
+{
+    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] removeObjectForKey:@"end_time"];
+    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] setObject:[NSString stringWithFormat:@"%f",[self getCurrentTimeInMilliseconds]] forKey:@"end_time"];
+}
+
 -(void)calculateDurationForAlgorithm:(NSString*)algorithm shuffle:(NSString*) shuffle
 {
     double startTimeMS =[[[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] objectForKey:@"start_time"]doubleValue];
@@ -67,22 +69,12 @@
     
     double runtime = endTimeMS - startTimeMS;
     
-    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] setObject:[NSString stringWithFormat:@"%f", runtime]
-                                                                         forKey:@"run_time_ms"];
     
+    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] removeObjectForKey:@"run_time_ms"];
+    [[[self.analysisLog objectForKey:algorithm] objectForKey:shuffle] setObject:[NSString stringWithFormat:@"%f",runtime] forKey:@"run_time_ms"];
+
 }
 
--(void)logStartTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle
-{
-    [[[self.analysisLog objectForKey:algorithm] objectForKey :shuffle]
-     setObject:[NSNumber numberWithDouble:[self getCurrentTimeInMilliseconds]]forKey:@"start_time"];
-}
-
--(void)logEndTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle
-{
-    [[[self.analysisLog objectForKey:algorithm] objectForKey :shuffle]
-     setObject:[NSNumber numberWithDouble:[self getCurrentTimeInMilliseconds]]forKey:@"end_time"];
-}
 
 
 -(void)printAnalysis

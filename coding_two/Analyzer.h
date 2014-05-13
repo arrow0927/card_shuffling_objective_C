@@ -17,4 +17,5 @@
 -(void)logStartTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle;
 -(void)logEndTimeForAlgorithm:(NSString*)algorithm forShuffleNumber:(NSString*)shuffle;
 -(void)printAnalysis;
+-(void)setMetricsForShuffle:(NSString*)shuffle forAlgorithm:(NSString*)algorithm;
 @end
